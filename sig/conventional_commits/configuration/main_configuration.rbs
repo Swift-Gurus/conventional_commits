@@ -1,0 +1,14 @@
+module ConventionalCommits
+  module Configuration
+
+    class MainConfiguration
+      @release: ReleaseConfiguration
+      @branch: BranchConfiguration
+      @type: TypeConfiguration
+
+      attr_reader branch: BranchConfiguration
+      attr_reader release: ReleaseConfiguration
+      attr_reader type: TypeConfiguration
+    end
+  end
+end

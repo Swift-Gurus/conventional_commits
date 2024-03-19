@@ -1,0 +1,23 @@
+branch:
+  lowercase: true
+  ticket_prefix: JIRA
+  pattern: <type>/<ticket>/<description>
+type:
+  feat: [ feature, feat ]
+  fix: [ bug, bugfix, fix ]
+  ci: [ ci ]
+  refactor: [ ref, refactor, refactoring ]
+  doc: [ doc, doc, documentation ]
+release:
+  rules:
+    - types:
+        - ref
+        - fix
+      version: patch
+    - types:
+        - feature
+      version: patch
+    - type: breaking
+      version: major
+
+

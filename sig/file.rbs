@@ -1,0 +1,7 @@
+class File
+  def self.create_directory: -> void
+
+  def self.delete_directory: -> void
+
+  def self.write_to_file: -> void
+end

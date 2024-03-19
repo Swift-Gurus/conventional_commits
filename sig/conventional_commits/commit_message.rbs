@@ -1,0 +1,5 @@
+module ConventionalCommits
+  class CommitMessage
+    def prepare_template_message: -> String
+  end
+end

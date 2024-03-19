@@ -1,0 +1,7 @@
+module ConventionalCommits
+  module Configuration
+    class BranchConfigurationReader
+      def get_configuration: -> BranchConfiguration
+    end
+  end
+end

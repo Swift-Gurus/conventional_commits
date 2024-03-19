@@ -1,0 +1,7 @@
+module ConventionalCommits
+  class Git
+    def current_branch_name: -> string
+
+    def run_system_command: -> string
+  end
+end

@@ -1,0 +1,8 @@
+module ConventionalCommits
+  module Configuration
+    class ReleaseRule
+      attr_reader types: [string]
+      attr_reader version: string
+    end
+  end
+end
