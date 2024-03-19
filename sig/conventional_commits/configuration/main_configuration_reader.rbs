@@ -1,0 +1,7 @@
+module ConventionalCommits
+  module Configuration
+    class MainConfigurationReader
+      def get_configuration: -> MainConfiguration
+    end
+  end
+end

@@ -1,0 +1,7 @@
+module ConventionalCommits
+  class BranchNameGenerator
+    @reader: Configuration::BranchConfigurationReader
+
+    attr_reader reader: Configuration::BranchConfigurationReader
+  end
+end

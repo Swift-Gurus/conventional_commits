@@ -1,0 +1,5 @@
+module ConventionalCommits
+  class SystemCaller
+    def run_command: -> void
+  end
+end

@@ -2,14 +2,56 @@ PATH
   remote: .
   specs:
     conventional_commits (0.1.0)
+      open3
+      thor
+      yaml
 
 GEM
   remote: https://rubygems.org/
   specs:
+    aruba (2.2.0)
+      bundler (>= 1.17, < 3.0)
+      contracts (>= 0.16.0, < 0.18.0)
+      cucumber (>= 8.0, < 10.0)
+      rspec-expectations (~> 3.4)
+      thor (~> 1.0)
     ast (2.4.2)
+    bigdecimal (3.1.6)
+    builder (3.2.4)
+    contracts (0.17)
+    cucumber (9.1.2)
+      builder (~> 3.2, >= 3.2.4)
+      cucumber-ci-environment (~> 9.2, >= 9.2.0)
+      cucumber-core (~> 12.0)
+      cucumber-cucumber-expressions (~> 17.0)
+      cucumber-gherkin (> 24, < 27)
+      cucumber-html-formatter (> 20.3, < 22)
+      cucumber-messages (> 19, < 25)
+      diff-lcs (~> 1.5)
+      mini_mime (~> 1.1, >= 1.1.5)
+      multi_test (~> 1.1, >= 1.1.0)
+      sys-uname (~> 1.2, >= 1.2.3)
+    cucumber-ci-environment (9.2.0)
+    cucumber-core (12.0.0)
+      cucumber-gherkin (>= 25, < 27)
+      cucumber-messages (>= 20, < 23)
+      cucumber-tag-expressions (~> 5.0, >= 5.0.4)
+    cucumber-cucumber-expressions (17.0.2)
+      bigdecimal
+    cucumber-gherkin (26.2.0)
+      cucumber-messages (>= 19.1.4, < 22.1)
+    cucumber-html-formatter (21.2.0)
+      cucumber-messages (> 19, < 25)
+    cucumber-messages (22.0.0)
+    cucumber-tag-expressions (5.0.6)
     diff-lcs (1.5.1)
+    docile (1.4.0)
+    ffi (1.16.3)
     json (2.7.1)
     language_server-protocol (3.17.0.3)
+    mini_mime (1.1.5)
+    multi_test (1.1.0)
+    open3 (0.1.1)
     parallel (1.24.0)
     parser (3.3.0.5)
       ast (~> 2.4.1)
@@ -32,7 +74,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-support (3.13.1)
-    rubocop (1.62.0)
+    rubocop (1.62.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -43,19 +85,32 @@ GEM
       rubocop-ast (>= 1.31.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.31.1)
+    rubocop-ast (1.31.2)
       parser (>= 3.3.0.4)
     ruby-progressbar (1.13.0)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.4)
+    sys-uname (1.2.3)
+      ffi (~> 1.1)
+    thor (1.3.1)
     unicode-display_width (2.5.0)
+    yaml (0.3.0)
 
 PLATFORMS
   arm64-darwin-23
 
 DEPENDENCIES
+  aruba
   conventional_commits!
+  cucumber
   rake (~> 13.0)
   rspec (~> 3.0)
   rubocop (~> 1.21)
+  simplecov
 
 BUNDLED WITH
    2.3.14

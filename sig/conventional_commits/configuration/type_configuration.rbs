@@ -1,0 +1,11 @@
+module ConventionalCommits
+  module Configuration
+    class TypeConfiguration
+      attr_reader options: {}
+
+      def is_allowed: -> bool
+
+      def main_type: -> string
+    end
+  end
+end

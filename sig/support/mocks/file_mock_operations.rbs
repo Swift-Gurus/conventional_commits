@@ -1,0 +1,9 @@
+module Support
+  module Mocks
+    class FileMockOperations
+      def self.update_pattern_in_config: -> void
+
+      attr_reader mocks: MockData
+    end
+  end
+end

@@ -1,0 +1,12 @@
+module Support
+  module Mocks
+    class MockData
+      attr_accessor working_directory: string
+
+      attr_accessor branch_name: string
+      attr_accessor configuration: string
+      attr_accessor directory: string
+      attr_accessor file: string
+    end
+  end
+end

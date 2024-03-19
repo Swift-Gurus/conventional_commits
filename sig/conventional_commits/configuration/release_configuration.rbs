@@ -1,0 +1,9 @@
+module ConventionalCommits
+  module Configuration
+    class ReleaseConfiguration
+      @rules: [ReleaseRule]
+
+      attr_reader rules: [ReleaseRule]
+    end
+  end
+end

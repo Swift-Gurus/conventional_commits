@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require "cli/branch_name_cli"
+require "branch/branch_name_generator"
+require "configuration/branch_configuration_reader"
+require "configuration/main_configuration_reader"
+require "models/main_configuration"
+require "models/release_configuration"
+require "models/release_rule"
+require "models/branch_configuration"
+require "configuration"
+require "models/type_configuration"
+require "commit/commit_message_generator"
+require "git/git"
+require "conventional_commits"
+require "helpers/file_extension"
+require "commit/commit_message_parser"
+require "commit/commit_message_validator"
+require "hooks/hooks_installer"
+ConventionalCommits::BranchNameCLI.start(ARGV)

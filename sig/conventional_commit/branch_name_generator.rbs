@@ -1,0 +1,10 @@
+module ConventionalCommit
+  class BranchNameGenerator
+    include  ConventionalCommits::Configuration
+    @reader: ConventionalCommits::Configuration::BranchConfigurationReader
+
+    attr_reader reader: ConventionalCommits::Configuration::BranchConfigurationReader
+
+    def generate_name_for: -> string
+  end
+end

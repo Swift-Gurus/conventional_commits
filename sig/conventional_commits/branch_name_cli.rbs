@@ -1,0 +1,8 @@
+module ConventionalCommits
+  class BranchNameCLI
+    def self.exit_on_failure?: -> bool
+    def branch: -> void
+
+    def prepare_commit_msg: -> void
+  end
+end

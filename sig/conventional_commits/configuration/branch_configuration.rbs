@@ -1,0 +1,16 @@
+module ConventionalCommits
+  module Configuration
+    DEFAULT_CONFIGURATION_PATH: string
+    DEFAULT_COMMIT_MSG_PATH: string
+    DEFAULT_COMMIT_BODY_TEMPLATE: string
+    class BranchConfiguration
+      @lowercase: bool
+      @pattern: string
+      @ticket_prefix: string
+
+      attr_reader pattern: bool
+      attr_reader lowercase: bool
+      attr_reader ticket_prefix: string
+    end
+  end
+end
