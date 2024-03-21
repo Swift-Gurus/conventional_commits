@@ -28,7 +28,7 @@ RSpec.describe ConventionalCommits::Configuration do
 
   context "Config path is not set" do
     it "returns mapped configuration" do
-      mock_file_open_with(expected: ".conventional_commit/config.yaml")
+      mock_file_open_with(expected: ".conventional_commits/config.yml")
       received = reader.get_configuration
 
       expect(received.pattern).to eq("<type>/<ticket>/<description>")

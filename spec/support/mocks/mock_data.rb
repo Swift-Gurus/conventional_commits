@@ -7,10 +7,10 @@ module Support
 
       def initialize
         @working_directory = ""
-        @directory = ".conventional_commit/"
-        @file = "config.yaml"
+        @directory = ".conventional_commits/"
+        @file = "config.yml"
         @branch_name = "feature 1235 build a new feature"
-        @configuration = FileMockOperations.read_file(path: "spec/support/mocks/config_mock.yaml")
+        @configuration = FileMockOperations.read_file(path: "spec/support/mocks/config_mock.yml")
       end
 
       def full_path
