@@ -54,7 +54,7 @@ module ConventionalCommits
       end
 
       def cli_command(cmd)
-        "bundle exec bin/conventional_commit #{cmd}"
+        "bundle exec conventional_commit #{cmd}"
       end
 
       def ruby_eval
