@@ -46,7 +46,7 @@ RSpec.describe ConventionalCommits::Configuration::HooksInstaller do
 
   def construct_expected_script(cmds: [])
     start = ["#!/bin/sh", "eval \"$(rbenv init -)\""]
-    mapped_cmds = cmds.map { |cmd| "bundle exec conventional_commit #{cmd}" }
+    mapped_cmds = cmds.map { |cmd| "bundle exec conventional_commits #{cmd}" }
     (start + mapped_cmds).join("\n")
   end
 end
