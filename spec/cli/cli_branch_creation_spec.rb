@@ -164,9 +164,9 @@ RSpec.describe ConventionalCommits::BranchNameCLI, type: :aruba do
 
   def run_cli_command(cmd, aruba: false)
     if aruba
-      run_command("conventional_commit #{cmd}")
+      run_command("conventional_commits #{cmd}")
     else
-      Open3.popen3("conventional_commit #{cmd}") { |_stdin, stdout, _stderr, _wait_thr| stdout.read }
+      Open3.popen3("conventional_commits #{cmd}") { |_stdin, stdout, _stderr, _wait_thr| stdout.read }
     end
   end
 
