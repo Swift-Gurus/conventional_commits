@@ -20,13 +20,13 @@ RSpec.describe ConventionalCommits::CommitMessageGenerator do
     end
 
     it "returns proper message when branch name contains underscore" do
-      allow_any_instance_of(ConventionalCommits::Git).to receive(:current_branch_name).and_return("feature/1235/build_a_new_feature")
+      allow_any_instance_of(ConventionalCommits::Git).to receive(:current_branch_name).and_return("myScope/feature/1235/build_a_new_feature")
       message = described_class.new.prepare_template_message
       expect(message).to eq expected_message
     end
 
     it "corrects to the lowercase" do
-      allow_any_instance_of(ConventionalCommits::Git).to receive(:current_branch_name).and_return("FEAT/1235/build-a-new-feature")
+      allow_any_instance_of(ConventionalCommits::Git).to receive(:current_branch_name).and_return("myScope/FEAT/1235/build-a-new-feature")
       message = described_class.new.prepare_template_message
       expect(message).to eq expected_message
     end

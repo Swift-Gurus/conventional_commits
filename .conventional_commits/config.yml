@@ -1,7 +1,7 @@
 branch:
   lowercase: true
   ticket_prefix: JIRA
-  pattern: <type>/<ticket>/<description>
+  pattern: <scope>/<type>/<ticket>/<description>
 type:
   feat: [ feature, feat ]
   fix: [ bug, bugfix, fix ]

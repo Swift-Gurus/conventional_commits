@@ -17,10 +17,11 @@ RSpec.describe ConventionalCommits::CommitMessageParser do
   context "when the message respects the format " do
     before do
       mock_cfg
-      mock_expected_message("feat: new feature\n\nbody just body\n\nfooter: my footer")
+      mock_expected_message("feat(scope): new feature\n\nbody just body\n\nfooter: my footer")
     end
     it "Returns Components" do
       components = described_class.new.message_components
+      expect(components[:scope]).to eq "scope"
       expect(components[:title]).to eq "new feature"
       expect(components[:type]).to eq "feat"
     end

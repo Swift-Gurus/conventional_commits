@@ -8,19 +8,22 @@ module ConventionalCommits
       main_config = Configuration::MainConfigurationReader.new.get_configuration(path: cfg_path)
       configuration = main_config.branch
       components = BranchNameGenerator.new.branch_name_components(branch_name, path: cfg_path)
-      type = (components[0] || "").downcase
-      ticket_number = components[1] || ""
-      description = components[2] || ""
+      scope = (components[:scope] || "").downcase
+      type = (components[:type] || "").downcase
+      ticket_number = components[:ticket_number] || ""
+      description = components[:description] || ""
       description = description.gsub(/-/, " ").gsub(/_/, " ")
 
       unless main_config.type.is_allowed(type)
         raise ConventionalCommits::GenericError,
               "The type #{type} is not allowed. Allowed types #{main_config.type.all_types}"
       end
-      type = "#{main_config.type.main_type(type)}: #{description}".strip
 
+      type = "#{main_config.type.main_type(type)}(#{scope}): #{description}".strip
+
+      ticket_ref = "#{configuration.ticket_prefix}#{configuration.ticket}#{configuration.ticket_separator}#{ticket_number}"
       body = custom_body.strip.empty? ? Configuration::DEFAULT_COMMIT_BODY_TEMPLATE : custom_body.strip
-      footer = "Ref: ##{configuration.ticket_prefix}#{ticket_number}".strip
+      footer = "Ref: #{ticket_ref}".strip
       "#{type}\n\n#{body}\n\n#{footer}"
     end
 

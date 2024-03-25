@@ -48,7 +48,7 @@ module Support
 
       def update_pattern_in_config(_new_pattern)
         config = YAML.load(mocks.configuration)
-        config["branch"]["pattern"] = "<type>/<ticket>-<description>"
+        config["branch"]["pattern"] = _new_pattern
         write_mock_data_to_file(data: YAML.dump(config))
       end
     end

@@ -52,7 +52,7 @@ RSpec.describe ConventionalCommits::BranchNameCLI, type: :aruba do
     expect(current_branch).to eq(random_branch)
     run_cli_command("validate_branch --cfg_path #{mocks.full_path}", aruba: true)
 
-    expect(last_command_started).to have_output eq("The branch doesnt respect the template, expect 2 delimiters. Received: random_branch")
+    expect(last_command_started).to have_output eq("The branch doesnt respect the template, expect 3 delimiters. Received: random_branch")
     switch_to_branch original_branch
     delete_branch(random_branch)
   end

@@ -20,9 +20,11 @@ RSpec.describe ConventionalCommits::Configuration do
       mock_file_open_with(expected: "test")
       received = reader.get_configuration(path: "test")
 
-      expect(received.pattern).to eq("<type>/<ticket>/<description>")
+      expect(received.pattern).to eq("<scope>/<type>/<ticket>/<description>")
       expect(received.lowercase).to eq(true)
-      expect(received.ticket_prefix).to eq("JIRA")
+      expect(received.ticket_prefix).to eq("#")
+      expect(received.ticket).to eq("JIRA")
+      expect(received.ticket_separator).to eq("-")
     end
   end
 
@@ -31,9 +33,11 @@ RSpec.describe ConventionalCommits::Configuration do
       mock_file_open_with(expected: ".conventional_commits/config.yml")
       received = reader.get_configuration
 
-      expect(received.pattern).to eq("<type>/<ticket>/<description>")
+      expect(received.pattern).to eq("<scope>/<type>/<ticket>/<description>")
       expect(received.lowercase).to eq(true)
-      expect(received.ticket_prefix).to eq("JIRA")
+      expect(received.ticket_prefix).to eq("#")
+      expect(received.ticket).to eq("JIRA")
+      expect(received.ticket_separator).to eq("-")
     end
   end
 

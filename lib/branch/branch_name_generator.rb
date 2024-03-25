@@ -32,12 +32,19 @@ module ConventionalCommits
         modified_input = splits[1] || ""
       end
       out.push(modified_input) unless modified_input.empty?
-      if delimiters.length + 1 > out.length
+      if delimiters.length > out.length
         raise ConventionalCommits::GenericError,
               "The branch doesnt respect the template, expect #{delimiters.length} delimiters. Received: #{received}".strip
       end
 
-      out
+      scope_is_included = out.length == Configuration::MAX_ELEMENTS_IN_PATTERN
+      idx_adj = scope_is_included ? 1 : 0
+      components = { scope: nil, type: nil, ticket_number: nil, description: nil }
+      components[:scope] = out.length == Configuration::MAX_ELEMENTS_IN_PATTERN ? out[0] : nil
+      components[:type] = out[0 + idx_adj]
+      components[:ticket_number] = out[1 + idx_adj]
+      components[:description] = out[2 + idx_adj]
+      components
     end
 
     def is_valid_branch(_input, path: Configuration::DEFAULT_CONFIGURATION_PATH)
@@ -47,7 +54,8 @@ module ConventionalCommits
     private
 
     def find_delimiters_from_pattern(pattern: string)
-      delimiters = pattern.gsub(/<type>/, "<replace>")
+      delimiters = pattern.gsub(/<scope>/, "<replace>")
+                          .gsub(/<type>/, "<replace>")
                           .gsub(/<ticket>/, "<replace>")
                           .gsub(/<description>/, "<replace>")
                           .split("<replace>")
