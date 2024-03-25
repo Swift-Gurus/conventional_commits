@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary = "Make your commit unified."
   spec.description = "Enforces conventional commits specs."
   spec.homepage = "https://github.com/Swift-Gurus/conventional_commits"
-  spec.required_ruby_version = ">= 3.1.0"
+  spec.required_ruby_version = ">= 3.1"
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
