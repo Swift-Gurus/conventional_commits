@@ -30,6 +30,12 @@ RSpec.describe ConventionalCommits::CommitMessageGenerator do
       message = described_class.new.prepare_template_message
       expect(message).to eq expected_message
     end
+
+    it "optional scope is not added" do
+      allow_any_instance_of(ConventionalCommits::Git).to receive(:current_branch_name).and_return("FEAT/1235/build-a-new-feature")
+      message = described_class.new.prepare_template_message
+      expect(message).to eq "feat: build a new feature\n\n[Describe your work, and put an empty string after]\n\nRef: #JIRA-1235"
+    end
   end
 
   context "branch contains type tha is not in the list" do
