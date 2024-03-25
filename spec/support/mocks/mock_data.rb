@@ -9,7 +9,7 @@ module Support
         @working_directory = ""
         @directory = ".conventional_commits/"
         @file = "config.yml"
-        @branch_name = "feature 1235 build a new feature"
+        @branch_name = "myscope feature 1235 build a new feature"
         @configuration = FileMockOperations.read_file(path: "spec/support/mocks/config_mock.yml")
       end
 
@@ -18,11 +18,11 @@ module Support
       end
 
       def expected_commit_message
-        "feat: build a new feature\n\n[Describe your work, and put an empty string after]\n\nRef: #JIRA1235"
+        "feat(myscope): build a new feature\n\n[Describe your work, and put an empty string after]\n\nRef: #JIRA-1235"
       end
 
       def expected_branch_name
-        "feature/1235/build-a-new-feature"
+        "myScope/feature/1235/build-a-new-feature"
       end
 
       def full_directory

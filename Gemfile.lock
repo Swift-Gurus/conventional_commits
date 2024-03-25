@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    conventional_commits (0.1.1)
+    conventional_commits (0.2.0)
       open3
       thor
       yaml
@@ -52,7 +52,7 @@ GEM
     language_server-protocol (3.17.0.3)
     mini_mime (1.1.5)
     multi_test (1.1.0)
-    open3 (0.1.1)
+    open3 (0.2.1)
     parallel (1.24.0)
     parser (3.3.0.5)
       ast (~> 2.4.1)

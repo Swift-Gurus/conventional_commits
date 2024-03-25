@@ -18,8 +18,10 @@ RSpec.describe ConventionalCommits::Configuration do
   context "Yaml exists" do
     it "Parses configuration" do
       config = reader.get_configuration
-      expect(config.branch.ticket_prefix).to eq "JIRA"
-      expect(config.branch.pattern).to eq "<type>/<ticket>/<description>"
+      expect(config.branch.ticket_prefix).to eq "#"
+      expect(config.branch.ticket).to eq "JIRA"
+      expect(config.branch.ticket_separator).to eq "-"
+      expect(config.branch.pattern).to eq "<scope>/<type>/<ticket>/<description>"
       expect(config.branch.lowercase).to eq true
       expect(config.type.options["feat"]).to eq %w[feature feat]
       expect(config.type.options["fix"]).to eq %w[bug bugfix fix]

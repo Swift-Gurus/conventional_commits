@@ -24,8 +24,10 @@ module ConventionalCommits
         raise raise GenericError,
                     "Subject doesnt respect the format"
       end
-      components = { type: "", title: "", body: "" }
-      components[:type] = subject_components[0]
+      scope_split = subject_components[0].split(/\(([^)]+)\)/)
+      components = { scope: nil, type: "", title: "", body: "" }
+      components[:scope] = scope_split.length > 1 ? scope_split[1] : nil
+      components[:type] = scope_split[0]
       components[:title] = subject_components[1]
       components[:body] = msg_components[2]
 

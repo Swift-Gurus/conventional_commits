@@ -19,6 +19,14 @@ RSpec.describe ConventionalCommits::CommitMessageValidator do
     end
   end
 
+  context "when the message respects the format with scope " do
+    it "Returns true" do
+      mock_expected_message("feat(scope): new feature\n\nbody just body\n\nfooter: my footer")
+      result = described_class.new.validate_commit_msg_from_file
+      expect(result).to eq true
+    end
+  end
+
   context "when message doesnt respect the format" do
     it "raises error about the type not found" do
       mock_expected_message("feat: new feature\nbody just body\nfooter: my footer")

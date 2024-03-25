@@ -6,11 +6,16 @@ module ConventionalCommits
     class BranchConfiguration
       @lowercase: bool
       @pattern: string
+      @ticket: string
       @ticket_prefix: string
+
+      @ticket_separator: string
 
       attr_reader pattern: bool
       attr_reader lowercase: bool
+      attr_reader ticket: string
       attr_reader ticket_prefix: string
+      attr_reader ticket_separator: string
     end
   end
 end
