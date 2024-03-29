@@ -56,7 +56,7 @@ module ConventionalCommits
       delimiters = find_delimiters_from_pattern(pattern:)
       out = split_name_using_delimiters(delimiters, input)
       if delimiters.length > out.length && pattern.include?("<scope>")
-        components_using(input, pattern.gsub(%r{<scope>/}, ""))
+        out = components_using(input, pattern.gsub(%r{<scope>/}, ""))
       elsif delimiters.length > out.length
         raise ConventionalCommits::GenericError,
               "The branch doesnt respect the template, expect at least #{delimiters.length} delimiters. Received: #{out}".strip

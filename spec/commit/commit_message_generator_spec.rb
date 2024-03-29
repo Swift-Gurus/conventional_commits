@@ -19,6 +19,13 @@ RSpec.describe ConventionalCommits::CommitMessageGenerator do
       expect(message).to eq expected_message
     end
 
+    it "returns proper message with custom pattern" do
+      file_operations.update_pattern_in_config("<scope>/<type>/<ticket>-<description>")
+      allow_any_instance_of(ConventionalCommits::Git).to receive(:current_branch_name).and_return("ci/1641-run-unit-tests-on-circle-ci")
+      message = described_class.new.prepare_template_message
+      expect(message).to eq "ci: run unit tests on circle ci\n\n[Describe your work, and put an empty string after]\n\nRef: #JIRA-1641"
+    end
+
     it "returns proper message when branch name contains underscore" do
       allow_any_instance_of(ConventionalCommits::Git).to receive(:current_branch_name).and_return("myScope/feature/1235/build_a_new_feature")
       message = described_class.new.prepare_template_message
