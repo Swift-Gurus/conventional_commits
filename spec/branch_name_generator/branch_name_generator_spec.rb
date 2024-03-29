@@ -49,8 +49,8 @@ RSpec.describe ConventionalCommits::BranchNameGenerator do
 
   context "Branch components" do
     it "returns split components for a given branch name using rules" do
-      components = described_class.new.branch_name_components("myScope/feature/1234/my-favorite-branch")
-      expect(components[:scope]).to eq "myScope"
+      components = described_class.new.branch_name_components("my_scope/feature/1234/my-favorite-branch")
+      expect(components[:scope]).to eq "my scope"
       expect(components[:type]).to eq "feature"
       expect(components[:ticket_number]).to eq "1234"
       expect(components[:description]).to eq "my-favorite-branch"
