@@ -22,20 +22,7 @@ module ConventionalCommits
 
     def branch_name_components(_input, path: Configuration::DEFAULT_CONFIGURATION_PATH)
       configuration = reader.get_configuration(path:)
-      delimiters = find_delimiters_from_pattern(pattern: configuration.pattern)
-      received = _input
-      modified_input = _input
-      out = []
-      delimiters.each do |d|
-        splits = modified_input.split(d, 2)
-        out.push(splits[0]) if splits.length.positive?
-        modified_input = splits[1] || ""
-      end
-      out.push(modified_input) unless modified_input.empty?
-      if delimiters.length > out.length
-        raise ConventionalCommits::GenericError,
-              "The branch doesnt respect the template, expect #{delimiters.length} delimiters. Received: #{received}".strip
-      end
+      out = components_using(_input, configuration.pattern)
 
       scope_is_included = out.length == Configuration::MAX_ELEMENTS_IN_PATTERN
       idx_adj = scope_is_included ? 1 : 0
@@ -63,6 +50,32 @@ module ConventionalCommits
       raise(GenericError, "Delimiters not found in pattern") if delimiters.empty?
 
       delimiters
+    end
+
+    def components_using(input, pattern)
+      delimiters = find_delimiters_from_pattern(pattern:)
+      out = split_name_using_delimiters(delimiters, input)
+      if delimiters.length > out.length && pattern.include?("<scope>")
+        components_using(input, pattern.gsub(%r{<scope>/}, ""))
+      elsif delimiters.length > out.length
+        raise ConventionalCommits::GenericError,
+              "The branch doesnt respect the template, expect at least #{delimiters.length} delimiters. Received: #{out}".strip
+      end
+
+      out
+    end
+
+    def split_name_using_delimiters(delimiters, input)
+      received = input
+      modified_input = input
+      out = []
+      delimiters.each do |d|
+        splits = modified_input.split(d, 2)
+        out.push(splits[0]) if splits.length.positive?
+        modified_input = splits[1] || ""
+      end
+      out.push(modified_input) unless modified_input.empty?
+      out
     end
 
     def transform_input_using_delimiters(_input, delimiters)
