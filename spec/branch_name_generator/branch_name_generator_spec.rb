@@ -57,7 +57,7 @@ RSpec.describe ConventionalCommits::BranchNameGenerator do
     end
 
     it "returns split components with mixed rules" do
-      file_operations.update_pattern_in_config("<type>/<ticket>-<description>")
+      file_operations.update_pattern_in_config("<scope>/<type>/<ticket>-<description>")
       components = described_class.new.branch_name_components("feature/1234-my-favorite-branch")
       expect(components[:scope]).to be_nil
       expect(components[:type]).to eq "feature"
