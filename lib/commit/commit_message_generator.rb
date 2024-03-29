@@ -12,7 +12,7 @@ module ConventionalCommits
       type = (components[:type] || "").downcase
       ticket_number = components[:ticket_number] || ""
       description = components[:description] || ""
-      description = description.gsub(/-/, " ").gsub(/_/, " ")
+      description = sanitize(description)
 
       unless main_config.type.is_allowed(type)
         raise ConventionalCommits::GenericError,
@@ -48,6 +48,10 @@ module ConventionalCommits
 
     def skippable_sources
       %w[message merge squash]
+    end
+
+    def sanitize(string)
+      string.gsub(/-/, " ").gsub(/_/, " ")
     end
   end
 end

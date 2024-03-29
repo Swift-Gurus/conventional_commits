@@ -27,7 +27,7 @@ module ConventionalCommits
       scope_is_included = out.length == Configuration::MAX_ELEMENTS_IN_PATTERN
       idx_adj = scope_is_included ? 1 : 0
       components = { scope: nil, type: nil, ticket_number: nil, description: nil }
-      components[:scope] = out.length == Configuration::MAX_ELEMENTS_IN_PATTERN ? out[0] : nil
+      components[:scope] = out.length == Configuration::MAX_ELEMENTS_IN_PATTERN ? sanitize(out[0]) : nil
       components[:type] = out[0 + idx_adj]
       components[:ticket_number] = out[1 + idx_adj]
       components[:description] = out[2 + idx_adj]
@@ -89,6 +89,10 @@ module ConventionalCommits
 
       raise(GenericError,
             "Doesnt match the pattern expect at least #{delimiters.length + 1} words")
+    end
+
+    def sanitize(string)
+      string.gsub(/-/, " ").gsub(/_/, " ")
     end
   end
 end
