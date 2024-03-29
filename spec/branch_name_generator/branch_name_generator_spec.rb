@@ -75,11 +75,16 @@ RSpec.describe ConventionalCommits::BranchNameGenerator do
       expect(described_class.new.is_valid_branch("myScope/feature/1234/my-favorite-branch")).to be true
     end
 
+    it "returns_valid_branch without scope" do
+      file_operations.update_pattern_in_config("<scope>/<type>/<ticket>-<description>")
+      expect(described_class.new.is_valid_branch("feature/1234-my-favorite-branch")).to be true
+    end
+
     it "validation throws error if branch doesnt match the pattern" do
       expect do
         generated_name = described_class.new.is_valid_branch("my branch")
       end.to raise_error(ConventionalCommits::GenericError,
-                         "The branch doesnt respect the template, expect 3 delimiters. Received: my branch")
+                         "The branch doesnt respect the template, expect at least 2 delimiters. Received: [\"my branch\"]")
     end
   end
 end
