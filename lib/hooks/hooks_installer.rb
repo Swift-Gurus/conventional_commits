@@ -9,19 +9,17 @@ module ConventionalCommits
         cmd = (common_hooks + [
           cli_command(prepare_commit_cli)
         ])
-              .join("\n")
-        create_file_and_make_executable(path: "prepare-commit-msg", data: cmd)
+        create_file_and_make_executable(path: "prepare-commit-msg", commands: cmd)
       end
 
       def install_pre_commit
         cmd = common_hooks
-              .join("\n")
-        create_file_and_make_executable(path: "pre-commit", data: cmd)
+        create_file_and_make_executable(path: "pre-commit", commands: cmd)
       end
 
       def install_commit_msg
-        cmd = (common_hooks + [cli_command(validate_commit_msg)]).join("\n")
-        create_file_and_make_executable(path: "commit-msg", data: cmd)
+        cmd = (common_hooks + [cli_command(validate_commit_msg)])
+        create_file_and_make_executable(path: "commit-msg", commands: cmd)
       end
 
       def install_all
@@ -30,11 +28,20 @@ module ConventionalCommits
         install_prepare_commit_msg
       end
 
-      def create_file_and_make_executable(path:, data:)
+      def create_file_and_make_executable(path:, commands:)
         File.create_directory(path: hook_directory)
         full_path = "#{hook_directory}/#{path}"
-        File.create_new_file_with_data(full_path, data)
+        filtered_commands = filter_existed_values_in_script(path: full_path, commands:)
+        data = filtered_commands.join("\n")
+        File.create_or_add_to_file_data(full_path, data)
         FileUtils.chmod("+x", full_path)
+      end
+
+      def filter_existed_values_in_script(path:, commands:)
+        return commands unless File.exist?(path)
+
+        data = File.read_file(path) || ""
+        commands.reject { |cmd| data.include?(cmd) }
       end
 
       def initial_lines
