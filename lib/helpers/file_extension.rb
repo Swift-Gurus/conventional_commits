@@ -28,6 +28,21 @@ class File
     end
   end
 
+  def self.add_to_file_data(path, data)
+    File.open(path, "a") do |f|
+      f.write(data)
+    end
+  end
+
+  def self.create_or_add_to_file_data(path, data)
+    if exist?(path)
+      data = data.empty? ? "" : "\n#{data}"
+      add_to_file_data(path, data)
+    else
+      create_new_file_with_data(path, data)
+    end
+  end
+
   def self.read_file(path)
     File.open(path, "r") do |f|
       data = f.read.to_s
