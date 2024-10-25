@@ -2,7 +2,7 @@
 
 require_relative "conventional_commits/version"
 
-module Conventional§Commits
+module ConventionalCommits
   class Error < StandardError; end
   # Your code goes here...
 end
