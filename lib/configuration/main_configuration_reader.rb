@@ -6,7 +6,7 @@ module ConventionalCommits
     class MainConfigurationReader
       def get_configuration(path: Configuration::DEFAULT_CONFIGURATION_PATH)
         raise GenericError, "Path is empty" if path.empty?
-        raise GenericError, "File not found" unless File.exist?(path)
+        raise GenericError, "File not found at #{path}" unless File.exist?(path)
 
         file = File.open(path)
         config = YAML.load(file)
