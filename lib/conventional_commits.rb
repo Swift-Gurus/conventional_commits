@@ -16,4 +16,8 @@ module ConventionalCommits
   def self.get_branch_components(branch_name)
     BranchNameGenerator.new.branch_name_components(branch_name)
   end
+
+  def self.get_configuration()
+    Configuration::MainConfigurationReader.new.get_configuration
+  end
 end
