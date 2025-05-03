@@ -2,3 +2,6 @@
   name: validate_brunch
   description: "Validation of branch"
   entry: "conventional_commits validate_branch_name"
+  language: ruby
+  language_version: 3.2.2
+  always_run: true
