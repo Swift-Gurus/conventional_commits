@@ -1,5 +1,5 @@
 - id: Branch Validation
-  name: validate_brunch
+  name: validate_branch
   description: "Validation of branch"
   entry: "conventional_commits validate_branch_name"
   language: ruby
