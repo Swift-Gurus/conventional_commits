@@ -24,10 +24,12 @@ module ConventionalCommits
     option :source, type: :string, required: false
     option :cfg_path, type: :string, required: false
     def prepare_commit_msg
-      source = options["source"] || ""
-      puts source
+      source = options["source"] || ENV["PRE_COMMIT_COMMIT_MSG_SOURCE"] || ""
+      puts  "source #{source}"
       msg_path = options["msg_path"] || Configuration::DEFAULT_COMMIT_MSG_PATH
       cfg_path = options["cfg_path"] || Configuration::DEFAULT_CONFIGURATION_PATH
+
+      return if msg_path != Configuration::DEFAULT_COMMIT_MSG_PATH
 
       generator = ConventionalCommits::CommitMessageGenerator.new
       unless generator.should_preserve_original_message(source:)
