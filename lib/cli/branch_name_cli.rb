@@ -31,6 +31,7 @@ module ConventionalCommits
 
       generator = ConventionalCommits::CommitMessageGenerator.new
       unless generator.should_try_to_parse_msg_from_file(source:)
+        puts "Generating message"
         name = generator.prepare_message_template_for_type(type: source, cfg_path:, msg_file_path: msg_path)
         File.write_to_file(msg_path, name)
       end
