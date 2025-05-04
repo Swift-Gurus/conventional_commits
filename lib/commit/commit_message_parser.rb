@@ -4,8 +4,9 @@ module ConventionalCommits
   class CommitMessageParser
     def message_components(commit_msg_path: Configuration::DEFAULT_COMMIT_MSG_PATH,
                            cfg_path: Configuration::DEFAULT_CONFIGURATION_PATH)
-      raise GenericError, "Commit Message File is not created" unless File.exist?(commit_msg_path)
       return if commit_msg_path != Configuration::DEFAULT_COMMIT_MSG_PATH
+      raise GenericError, "Commit Message File is not created" unless File.exist?(commit_msg_path)
+
 
       data = File.read_file(commit_msg_path)
       message_components_from_string(commit_msg: data.to_s, cfg_path:)

@@ -55,11 +55,7 @@ module ConventionalCommits
     option :msg_path, type: :string, required: false
     option :msg, type: :string, required: false
     option :cfg_path, type: :string, required: false
-    option :source, type: :string, required: false
     def validate_commit_msg
-      generator = ConventionalCommits::CommitMessageGenerator.new
-      src = options["source"] || ""
-      return if generator.should_preserve_original_message(source: src)
 
       msg_path = options["msg_path"] || Configuration::DEFAULT_COMMIT_MSG_PATH
       cfg_path = options["cfg_path"] || Configuration::DEFAULT_CONFIGURATION_PATH
