@@ -30,7 +30,7 @@ module ConventionalCommits
       cfg_path = options["cfg_path"] || Configuration::DEFAULT_CONFIGURATION_PATH
 
       generator = ConventionalCommits::CommitMessageGenerator.new
-      unless generator.should_try_to_parse_msg_from_file(source:)
+      unless generator.should_preserve_original_message(source:)
         puts "Generating message"
         name = generator.prepare_message_template_for_type(type: source, cfg_path:, msg_file_path: msg_path)
         File.write_to_file(msg_path, name)
@@ -59,7 +59,7 @@ module ConventionalCommits
     def validate_commit_msg
       generator = ConventionalCommits::CommitMessageGenerator.new
       src = options["source"] || ""
-      return if generator.should_try_to_parse_msg_from_file(source: src)
+      return if generator.should_preserve_original_message(source: src)
 
       msg_path = options["msg_path"] || Configuration::DEFAULT_COMMIT_MSG_PATH
       cfg_path = options["cfg_path"] || Configuration::DEFAULT_CONFIGURATION_PATH
