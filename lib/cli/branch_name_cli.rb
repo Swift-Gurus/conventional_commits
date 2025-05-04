@@ -30,8 +30,11 @@ module ConventionalCommits
       cfg_path = options["cfg_path"] || Configuration::DEFAULT_CONFIGURATION_PATH
 
       generator = ConventionalCommits::CommitMessageGenerator.new
-      name = generator.prepare_message_template_for_type(type: source, cfg_path:, msg_file_path: msg_path)
-      File.write_to_file(msg_path, name)
+      unless generator.should_try_to_parse_msg_from_file(source:)
+        name = generator.prepare_message_template_for_type(type: source, cfg_path:, msg_file_path: msg_path)
+        File.write_to_file(msg_path, name)
+      end
+      
     rescue StandardError => e
       raise Thor::Error, e.message
     end

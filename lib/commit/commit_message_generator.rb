@@ -39,12 +39,11 @@ module ConventionalCommits
       data = File.read_file(msg_file_path).to_s
       prepare_template_message(custom_body: data, cfg_path:)
     end
-
-    private
-
     def should_try_to_parse_msg_from_file(source: "")
       skippable_sources.include?(source)
     end
+
+    private
 
     def skippable_sources
       %w[message merge squash]
