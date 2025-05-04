@@ -5,3 +5,4 @@
   language: ruby
   language_version: 3.2.2
   always_run: true
+  pass_filenames: false
