@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    conventional_commits (0.2.19)
+    conventional_commits (0.2.20)
       open3
       thor
       yaml
