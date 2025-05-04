@@ -20,7 +20,7 @@ RSpec.describe ConventionalCommits::Configuration::HooksInstaller do
     it "writes prepare commit message hook" do
       expected_script = construct_expected_script(cmds: [
                                                     "validate_branch_name",
-                                                    "prepare_commit_msg --msg_path $1"
+                                                    "prepare_commit_msg --msg_path $1 --source $2"
                                                   ])
 
       set_common_expectations(file_name: "prepare-commit-msg", expected_script:)

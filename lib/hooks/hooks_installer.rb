@@ -73,7 +73,7 @@ module ConventionalCommits
       end
 
       def prepare_commit_cli
-        "prepare_commit_msg --msg_path $1"
+        "prepare_commit_msg --msg_path $1 --source $2"
       end
 
       def validate_commit_msg
