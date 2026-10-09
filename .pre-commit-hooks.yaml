@@ -6,3 +6,22 @@
   language_version: 3.2.2
   always_run: true
   pass_filenames: false
+
+- id: validate_message
+  name: Message Validation
+  description: "Validate commit message"
+  entry: "conventional_commits validate_commit_msg"
+  language: ruby
+  language_version: 3.2.2
+  pass_filenames: false
+  always_run: true
+
+- id: prepare_message
+  name: Prepare Commit Message
+  description: "Preparing commit message"
+  entry: "conventional_commits prepare_commit_msg"
+  language: ruby
+  language_version: 3.2.2
+  pass_filenames: false
+  args: [--source=$PRE_COMMIT_COMMIT_MSG_SOURCE]
+  always_run: true

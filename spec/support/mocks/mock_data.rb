@@ -21,8 +21,9 @@ module Support
         "feat(myscope): build a new feature\n\n[Describe your work, and put an empty string after]\n\nRef: #JIRA-1235"
       end
 
+      # The mock configuration lowercases branch names; git refs are case-sensitive on Linux.
       def expected_branch_name
-        "myScope/feature/1235/build-a-new-feature"
+        "myscope/feature/1235/build-a-new-feature"
       end
 
       def full_directory

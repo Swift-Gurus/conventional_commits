@@ -124,10 +124,49 @@ RSpec.describe ConventionalCommits::BranchNameCLI, type: :aruba do
     expect(last_command_started).to have_output eq("Commit message is valid")
   end
 
+  it "validates the branch passed with --branch instead of the current one" do
+    set_up_for_aruba
+
+    run_cli_command("validate_branch --branch myscope/feature/1235/build-a-new-feature --cfg_path #{mocks.full_path}", aruba: true)
+
+    expect(last_command_started).to be_successfully_executed
+  end
+
+  it "rejects the branch passed with --branch when its type is not allowed" do
+    set_up_for_aruba
+
+    run_cli_command("validate_branch --branch myscope/chore/1235/build-a-new-feature --cfg_path #{mocks.full_path}", aruba: true)
+
+    expect(last_command_started).to have_output(/The type chore is not allowed/)
+  end
+
+  it "validates message text passed with --msg" do
+    set_up_for_aruba
+
+    run_cli_command("validate_commit_msg --msg \"feat: new feature\n\nbody just body\n\nfooter: my footer\" --cfg_path #{mocks.full_path}", aruba: true)
+
+    expect(last_command_started).to have_output eq("Commit message is valid")
+  end
+
+  it "rejects message text passed with --msg that has no type" do
+    set_up_for_aruba
+
+    run_cli_command("validate_commit_msg --msg \"just some words\" --cfg_path #{mocks.full_path}", aruba: true)
+
+    expect(last_command_started).to have_output eq("Commit Message Doesnt respect the spec, expect to have subject, body and footer")
+  end
+
   def set_up(path: "")
     original_branch = current_branch
     file_operations.mocks.working_directory = path
     file_operations.write_mock_data_to_file
+  end
+
+  # Aruba runs commands from inside its working directory, so the config path passed to them
+  # must be relative to it.
+  def set_up_for_aruba
+    set_up(path: Aruba.config.working_directory)
+    file_operations.mocks.working_directory = ""
   end
 
   def clean_up(path: "")
