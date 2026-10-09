@@ -2,12 +2,13 @@
 
 module ConventionalCommits
   module Configuration
-    # Configuration for branch name policies
+    # A release rule: which commit types produce which version bump
     class ReleaseRule
       attr_reader :types, :version
 
+      # Accepts both `types: [..]` and the singular `type: ..` used for the breaking rule.
       def initialize(options = {})
-        @types = options["types"] || []
+        @types = Array(options["types"] || options["type"])
         @version = options["version"] || "none"
       end
     end

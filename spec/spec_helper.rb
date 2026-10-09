@@ -20,6 +20,7 @@ require "models/type_configuration"
 require "hooks/hooks_installer"
 require "commit/commit_message_parser"
 require "commit/commit_message_validator"
+require "release/next_version_calculator"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
