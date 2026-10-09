@@ -86,5 +86,21 @@ RSpec.describe ConventionalCommits::BranchNameGenerator do
       end.to raise_error(ConventionalCommits::GenericError,
                          "The branch doesnt respect the template, expect at least 2 delimiters. Received: [\"my branch\"]")
     end
+
+    it "validation throws error if branch has no description" do
+      expect do
+        described_class.new.is_valid_branch("feature/no-ticket")
+      end.to raise_error(ConventionalCommits::GenericError, "The branch feature/no-ticket has no description")
+    end
+
+    it "validation throws error if branch type is not allowed" do
+      expect do
+        described_class.new.is_valid_branch("myscope/chore/1234/my-favorite-branch")
+      end.to raise_error(ConventionalCommits::GenericError, /The type chore is not allowed/)
+    end
+
+    it "validation accepts an allowed type in any case" do
+      expect(described_class.new.is_valid_branch("myscope/Feature/1234/my-favorite-branch")).to be true
+    end
   end
 end

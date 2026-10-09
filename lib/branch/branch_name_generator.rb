@@ -2,10 +2,12 @@
 
 module ConventionalCommits
   class BranchNameGenerator
-    attr_reader :reader
+    attr_reader :reader, :main_reader
 
-    def initialize(reader: reader = Configuration::BranchConfigurationReader.new)
+    def initialize(reader: reader = Configuration::BranchConfigurationReader.new,
+                   main_reader: Configuration::MainConfigurationReader.new)
       @reader = reader
+      @main_reader = main_reader
     end
 
     def generate_name_for(_input, path: Configuration::DEFAULT_CONFIGURATION_PATH)
@@ -34,11 +36,30 @@ module ConventionalCommits
       components
     end
 
+    # A branch is valid when the commit message generator can build a subject from it: the
+    # type must be one the configuration allows, and the description must not be empty.
     def is_valid_branch(_input, path: Configuration::DEFAULT_CONFIGURATION_PATH)
-      !branch_name_components(_input, path:).empty?
+      components = branch_name_components(_input, path:)
+      validate_description(components[:description], branch: _input)
+      validate_type(components[:type], path:)
+      true
     end
 
     private
+
+    def validate_description(description, branch:)
+      return unless description.to_s.strip.empty?
+
+      raise GenericError, "The branch #{branch} has no description"
+    end
+
+    def validate_type(type, path:)
+      type_configuration = main_reader.get_configuration(path:).type
+      return if type_configuration.is_allowed(type.to_s.downcase)
+
+      raise GenericError,
+            "The type #{type} is not allowed. Allowed types #{type_configuration.all_types}"
+    end
 
     def find_delimiters_from_pattern(pattern: string)
       delimiters = pattern.gsub(/<scope>/, "<replace>")
