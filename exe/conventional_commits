@@ -17,4 +17,5 @@ require "helpers/file_extension"
 require "commit/commit_message_parser"
 require "commit/commit_message_validator"
 require "hooks/hooks_installer"
+require "release/next_version_calculator"
 ConventionalCommits::BranchNameCLI.start(ARGV)

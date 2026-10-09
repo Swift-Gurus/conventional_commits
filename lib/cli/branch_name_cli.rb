@@ -70,6 +70,18 @@ module ConventionalCommits
       raise Thor::Error, e.message
     end
 
+    desc "next_version", "prints the next release version from the commits since the latest version tag"
+    option :cfg_path, type: :string, required: false
+    option :initial, type: :string, required: false, desc: "Version to print when there is no version tag yet (default 0.1.0)"
+    def next_version
+      cfg_path = options["cfg_path"] || Configuration::DEFAULT_CONFIGURATION_PATH
+      version = ConventionalCommits::NextVersionCalculator.new
+                                                         .next_version(cfg_path:, initial: options["initial"] || "0.1.0")
+      puts version if version
+    rescue StandardError => e
+      raise Thor::Error, e.message
+    end
+
     desc "install_hooks", "install all git hooks"
     def install_hooks
       installer = ConventionalCommits::Configuration::HooksInstaller.new

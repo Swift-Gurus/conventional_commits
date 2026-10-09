@@ -55,8 +55,29 @@ to create a new branch
 - `pattern` - is used to define the separators between in future it will be used to define the order as well
 - `type` - is used for mapping combination of short names for the type of request. Helps to avoid inconsistency.
 
+### Validating in CI
+The hooks validate the current branch and `.git/COMMIT_EDITMSG`. In CI, pass them explicitly:
+
+    $ conventional_commits validate_branch --branch "$GITHUB_HEAD_REF"
+    $ conventional_commits validate_commit_msg --msg "$(git log -1 --format=%B "$SHA")"
+
+With a detached `HEAD` and no `--branch`, `validate_branch` falls back to `$GITHUB_HEAD_REF`.
+
 ### Release
-Not implemented yet. It will contain tools to increment version number based on the rules
+`next_version` prints the next version from the commits since the latest version tag
+(`X.Y.Z` or `vX.Y.Z`), following `release.rules`:
+
+    $ conventional_commits next_version
+    0.3.1
+
+- Each commit's type is matched against the rules' types; aliases from `type` count as their
+  main type, so a `ref:` commit matches a rule listing `refactor`.
+- A breaking change — `type!:` in the subject or a `BREAKING CHANGE:` footer — uses the rule
+  for `breaking`.
+- The biggest bump of all the commits wins (`major` > `minor` > `patch`); `version: none`, or a
+  type without a rule, produces no release.
+- It prints nothing when no commit calls for a release, and `--initial` (default `0.1.0`) when
+  there is no version tag yet.
 
 
 ## Development
